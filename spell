@@ -1,0 +1,110 @@
+import java.util.Timer;
+import java.util.TimerTask;
+
+class Spell {
+    String name;
+    int levelRequirement;
+    String description;
+    int mpCost;
+    int cooldown;
+    boolean isLocked;
+
+    public Spell(String name, int levelRequirement, String description, int mpCost, int cooldown) {
+        this.name = name;
+        this.levelRequirement = levelRequirement;
+        this.description = description;
+        this.mpCost = mpCost;
+        this.cooldown = cooldown;
+        this.isLocked = true;
+    }
+
+    public void unlockSpell() {
+        isLocked = false;
+    }
+}
+
+class Character {
+    String name;
+    int level;
+    int maxHP;
+    int currentHP;
+    int maxMP;
+    int currentMP;
+
+    public Character(String name, int maxHP, int maxMP) {
+        this.name = name;
+        this.level = 1;
+        this.maxHP = maxHP;
+        this.currentHP = maxHP;
+        this.maxMP = maxMP;
+        this.currentMP = maxMP;
+    }
+
+    public void levelUp() {
+        level++;
+    }
+
+    public void castSpell(Spell spell) {
+        if (spell.isLocked || level < spell.levelRequirement) {
+            System.out.println("Spell locked or level requirement not met.");
+            return;
+        }
+
+        if (currentMP < spell.mpCost) {
+            System.out.println("Not enough MP to cast the spell.");
+            return;
+        }
+
+        System.out.println("Casting " + spell.name + " - " + spell.description);
+        currentMP -= spell.mpCost;
+
+        // Start the cooldown timer
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println(spell.name + " is now available.");
+                timer.cancel();
+            }
+        }, spell.cooldown * 1000);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create characters for each archetype
+        Character warrior = new Character("Warrior", 60, 100);
+        Character mage = new Character("Mage", 40, 120);
+        Character rogue = new Character("Rogue", 50, 80);
+        Character paladin = new Character("Paladin", 70, 80);
+        Character archer = new Character("Archer", 45, 90);
+
+        // Create spells for each archetype
+        Spell roaring = new Spell("Roaring", 5, "Silences the opponent", 10, 3);
+        Spell fireball = new Spell("Fireball", 8, "Deals fire damage", 15, 4);
+        Spell backstab = new Spell("Backstab", 6, "Executes a sneak attack", 12, 3);
+        Spell divineSmite = new Spell("Divine Smite", 10, "Smite enemies with divine power", 20, 5);
+        Spell rapidShot = new Spell("Rapid Shot", 7, "Quickly fires multiple arrows", 14, 4);
+
+        // Unlock the first spell for each archetype
+        roaring.unlockSpell();
+        fireball.unlockSpell();
+        backstab.unlockSpell();
+        divineSmite.unlockSpell();
+        rapidShot.unlockSpell();
+
+        // Simulate characters leveling up
+        warrior.levelUp();
+        mage.levelUp();
+        rogue.levelUp();
+        paladin.levelUp();
+        archer.levelUp();
+
+        // Simulate characters casting spells
+        warrior.castSpell(roaring);
+        mage.castSpell(fireball);
+        rogue.castSpell(backstab);
+        paladin.castSpell(divineSmite);
+        archer.castSpell(rapidShot);
+    }
+}
