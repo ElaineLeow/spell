@@ -1,158 +1,60 @@
-import java.util.ArrayList;
-import java.util.List;
+public class CharacterSpells {
+    public static void main(String[] args) {
+        // Warrior Spells
+        Spell furiousStrike = new Spell("Furious Strike", 10, "Unleashes a powerful attack, dealing heavy damage to the target.", 4);
+        Spell shieldWall = new Spell("Shield Wall", 30, "The Warrior creates an impenetrable barrier with their shield, reducing incoming damage for 3 rounds.", 6);
+        Spell whirlwindSlash = new Spell("Whirlwind Slash", 50, "Performs a spinning slash, hitting multiple enemies and dealing damage to each.", 8);
+
+        // Mage Spells
+        Spell fireball = new Spell("Fireball", 10, "Hurls a fiery projectile at the target, dealing moderate fire damage.", 2);
+        Spell frostNova = new Spell("Frost Nova", 30, "The Mage releases a burst of frost, freezing nearby enemies in place for 2 rounds.", 6);
+        Spell arcaneMissile = new Spell("Arcane Missile", 50, "Launches a barrage of arcane missiles, hitting the target multiple times.", 8);
+
+        // Rogue Spells
+        Spell backstab = new Spell("Backstab", 10, "The Rogue sneaks behind the target, delivering a devastating backstab, causing extra damage and stunning the enemy for 1 round.", 3);
+        Spell shadowstep = new Spell("Shadowstep", 30, "The Rogue can evade the next spell or attack from the enemies.", 6);
+        Spell poisonDagger = new Spell("Poison Dagger", 50, "Throws a poisoned dagger at the enemy, dealing damage over time.", 8);
+
+        // Paladin Spells
+        Spell holySmite = new Spell("Holy Smite", 10, "Smashes the target with divine light, dealing damage and healing the Paladin for a portion of the damage dealt.", 3);
+        Spell divineShield = new Spell("Divine Shield", 30, "Creates a protective barrier around the Paladin, rendering them immune to damage for 2 rounds.", 6);
+        Spell righteousJudgment = new Spell("Righteous Judgment", 50, "Passes judgment on the enemy, dealing massive damage based on their actions.", 8);
+
+        // Archer Spells
+        Spell rapidShot = new Spell("Rapid Shot", 10, "Fires a flurry of arrows at the target, dealing moderate damage.", 2);
+        Spell trickShot = new Spell("Trick Shot", 30, "Executes a precise shot that can pierce the enemies, causing heavy damage to the enemy.", 6);
+        Spell explosiveArrow = new Spell("Explosive Arrow", 50, "Shoots an arrow infused with explosive magic, damaging all enemies in an area.", 8);
+    }
+}
 
 class Spell {
-    String name;
-    int levelRequirement;
-    String description;
-    int mpCost;
-    int cooldown;
+    private String name;
+    private int levelRequirement;
+    private String description;
+    private int coolDown;
 
-    public Spell(String name, int levelRequirement, String description, int mpCost, int cooldown) {
+    public Spell(String name, int levelRequirement, String description, int coolDown) {
         this.name = name;
         this.levelRequirement = levelRequirement;
         this.description = description;
-        this.mpCost = mpCost;
-        this.cooldown = cooldown;
+        this.coolDown = coolDown;
+    }
+
+    // Getters and Setters (if needed)
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevelRequirement() {
+        return levelRequirement;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getCoolDown() {
+        return coolDown;
     }
 }
-
-public class Archetype {
-    String name;
-    int healthPoints;
-    int manaPoints;
-    int physicalDefense;
-    int magicalDefense;
-    int physicalAttack;
-    int magicalAttack;
-    int playerExp;
-    int playerlevel;
-    List<Spell> spells;
-
-    public Archetype(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense,
-                     int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
-        this.name = name;
-        this.healthPoints = healthPoints;
-        this.manaPoints = manaPoints;
-        this.physicalDefense = physicalDefense;
-        this.magicalDefense = magicalDefense;
-        this.physicalAttack = physicalAttack;
-        this.magicalAttack = magicalAttack;
-        this.playerExp = playerExp;
-        this.playerlevel = playerlevel;
-        this.spells = new ArrayList<>();
-    }
-
-    public void addSpell(Spell spell) {
-        spells.add(spell);
-    }
-}
-
-class Warrior extends Archetype {
-    public Warrior(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense,
-                   int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
-        super("Warrior", 300, 50, 80, 20, 70, 50, 0, 0);
-        addSpells();
-    }
-
-    private void addSpells() {
-        Spell spell1 = new Spell("Roaring", 5, "Silences the opponent", 10, 3);
-        Spell spell2 = new Spell("Crushing Blow", 10, "Deals significant damage", 15, 4);
-        Spell spell3 = new Spell("Iron Defense", 15, "Reduces incoming damage", 20, 5);
-
-        addSpell(spell1);
-        addSpell(spell2);
-        addSpell(spell3);
-    }
-}
-
-class Mage extends Archetype {
-    public Mage(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense,
-                int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
-        super("Mage", 200, 150, 30, 100, 20, 30, 0, 0);
-        addSpells();
-    }
-
-    private void addSpells() {
-        Spell spell1 = new Spell("Fireball", 5, "Deals fire damage", 15, 4);
-        Spell spell2 = new Spell("Ice Shard", 10, "Launches a shard of ice", 18, 5);
-        Spell spell3 = new Spell("Teleport", 15, "Instantly teleports to a nearby location", 12, 3);
-
-        addSpell(spell1);
-        addSpell(spell2);
-        addSpell(spell3);
-    }
-}
-
-class Rogue extends Archetype {
-    public Rogue(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense,
-                 int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
-        super("Rogue", 250, 75, 60, 40, 50, 40, 0, 0);
-        addSpells();
-    }
-
-    private void addSpells() {
-        Spell spell1 = new Spell("Backstab", 5, "Executes a sneak attack", 12, 3);
-        Spell spell2 = new Spell("Poison Strike", 10, "Inflicts poison on the opponent", 14, 4);
-        Spell spell3 = new Spell("Vanish", 15, "Temporarily disappears from sight", 10, 3);
-
-        addSpell(spell1);
-        addSpell(spell2);
-        addSpell(spell3);
-    }
-}
-
-class Paladin extends Archetype {
-    public Paladin(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense,
-                   int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
-        super("Paladin", 350, 100, 70, 60, 80, 60, 0, 0);
-        addSpells();
-    }
-
-    private void addSpells() {
-        Spell spell1 = new Spell("Divine Smite", 5, "Smite enemies with divine power", 20, 5);
-        Spell spell2 = new Spell("Holy Shield", 10, "Creates a protective shield", 25, 6);
-        Spell spell3 = new Spell("Heal", 15, "Restores health", 15, 4);
-
-        addSpell(spell1);
-        addSpell(spell2);
-        addSpell(spell3);
-    }
-}
-
-class Archer extends Archetype {
-    public Archer(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense,
-                  int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
-        super("Archer", 240, 60, 65, 50, 45, 30, 0, 0);
-        addSpells();
-    }
-
-    private void addSpells() {
-        Spell spell1 = new Spell("Rapid Shot", 5, "Quickly fires multiple arrows", 14, 4);
-        Spell spell2 = new Spell("Explosive Arrow", 10, "Launches an explosive arrow", 20, 5);
-        Spell spell3 = new Spell("Precision Shot", 15, "A highly accurate shot", 16, 4);
-
-        addSpell(spell1);
-        addSpell(spell2);
-        addSpell(spell3);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        // Create instances of each archetype
-        Warrior warrior = new Warrior("Warrior", 0, 0, 0, 0, 0, 0, 0, 0);
-        Mage mage = new Mage("Mage", 0, 0, 0, 0, 0, 0, 0, 0);
-        Rogue rogue = new Rogue("Rogue", 0, 0, 0, 0, 0, 0, 0, 0);
-        Paladin paladin = new Paladin("Paladin", 0, 0, 0, 0, 0, 0, 0, 0);
-        Archer archer = new Archer("Archer", 0, 0, 0, 0, 0, 0, 0, 0);
-
-        // Print spells for each archetype
-        printSpells(warrior);
-        printSpells(mage);
-        printSpells(rogue);
-        printSpells(paladin);
-        printSpells(archer);
-    }
-
-    private static void printSpells(Archetype archetype) {
